@@ -5,7 +5,7 @@
 ### Steps needed to run wrap.py
 ***************************
 
-#### set up python
+#### Set up python
 
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
     bash Miniconda2-latest-Linux-x86_64.sh
@@ -15,7 +15,7 @@
     conda install pip pytables matplotlib scikit-learn seaborn pandas statsmodels cython sympy networkx 
     pip install nibabel nipy nipype 
 
-#### to be able to use and import the matlab engine
+#### To be able to use and import the matlab engine
 
     cd "matlabroot\extern\engines\python"
 
@@ -25,7 +25,7 @@
 
 
 
-#### other matlab dependencies
+#### Other matlab dependencies
 
 * download both from the links below, make sure to run the install.m file in the varbvs download. this will require a gcc version of 4.7.x
 
