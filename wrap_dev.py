@@ -15,7 +15,7 @@ def setup(vbvs, gpml, depvb, comp, outpath):
     import os
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
-    eng.run(checkstr(outpath), nargout=0)
+    eng.run(checkstr(outpath) + 'startup.m', nargout=0)
     os.chdir(outpath)
     return output
     
