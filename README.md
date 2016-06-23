@@ -18,3 +18,5 @@
 
 https://github.com/pcarbo/varbvs/tree/c24049a5bc9532dae4f7f2d81df50ca877a47a6d
 http://www.gaussianprocess.org/gpml/code/matlab/doc/
+
+#### python dependencies to be added soon
