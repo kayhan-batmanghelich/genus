@@ -4,7 +4,7 @@ next steps:
   check normalize step
   create the cvs output
   check fxvb step
-  add nipype into script for parrallel processing
+  add nipype into script for parallel processing
 '''
 
 import matlab.engine
