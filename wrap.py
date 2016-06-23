@@ -7,7 +7,6 @@ next steps:
   add nipype into script for parrallel processing
 '''
 
-import numpy as np
 import matlab.engine
 import os
 
