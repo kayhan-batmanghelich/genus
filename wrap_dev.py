@@ -31,4 +31,27 @@ def csv(colnums, matfiles):
     for i in range(colnums):
         df.loc[i] = [i, matfiles[i]]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
-    return df 
+    return df
+
+
+Csv = pd.Node(name='Csv',
+             interface=Function(input_names=['colnums','matfiles'],
+                               output_names=['df'],
+                               function=csv))
+ 
+if __name__ == '__main__':
+    import argparse
+    defstr = '(default %(default)s)'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-nr', '--numrepeats', type=int)
+    parser.add_argument('-cn', '--colnums', type=int)
+    parser.add_argument('-s', '--step', type=str)
+    parser.add_argument('-o', '--outpath', type=str)
+    args=parser.parse_args()
+    numrepeats = args.numrepeats
+    colnums = args.colnums
+    step = args.step
+    outpath = args.outpath
+    
+Setup.inputs.outpath = outpath
+Csv.inputs.colnums = colnums
