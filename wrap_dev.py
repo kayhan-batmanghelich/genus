@@ -51,19 +51,18 @@ Runstep = pe.Node(name='Runstep',
                 output_names=[''],
                         function=runstep))    
     
- 
 if __name__ == '__main__':
     import argparse
     defstr = '(default %(default)s)'
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '--numrepeats', type=int)
-    parser.add_argument('-cn', '--colnums', type=int)
-    parser.add_argument('-s', '--step', type=str)
-    parser.add_argument('-v', '--vbvs', type=str)
-    parser.add_argument('-g', '--gpml', type=str)
-    parser.add_argument('-d', '--depvb', type=str)
-    parser.add_argument('-c', '--comp', type=str)
-    parser.add_argument('-o', '--outpath', type=str)
+    parser.add_argument('-n', '--numrepeats', type=int, help='')
+    parser.add_argument('-cn', '--colnums', type=int, help='the number of features in your data matrix')
+    parser.add_argument('-s', '--step', type=str, help="either 'bf', 'normalize', or 'fxvb'")
+    parser.add_argument('-v', '--vbvs', type=str, help='path to varbvs directory')
+    parser.add_argument('-g', '--gpml', type=str, help='path to gpml directory')
+    parser.add_argument('-d', '--depvb', type=str, help='path to where deployEndoPhenVB.m lives')
+    parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
+    parser.add_argument('-o', '--outpath', type=str, help='path for the output files')
     args=parser.parse_args()
     numrepeats = args.numrepeats
     colnums = args.colnums
