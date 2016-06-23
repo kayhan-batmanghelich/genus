@@ -7,8 +7,9 @@ Steps needed to run wrap.py
 
 #### to be able to use and import the matlab engine
 
-cd "matlabroot\extern\engines\python"
-python setup.py build --build-base="builddir" install --prefix="installdir"
+    cd "matlabroot\extern\engines\python"
+
+    python setup.py build --build-base="builddir" install --prefix="installdir"
 
 
 
