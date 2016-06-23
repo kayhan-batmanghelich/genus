@@ -19,8 +19,10 @@
 
 * create an alias in your ~/.bashrc to source the environment
 
+
     vi ~/.bashrc
     alias genv="source activate /PHShome/ysa2/genus_env"
+    
 * save and exit. `source ~/.bashrc` and now `genv`
 
 
