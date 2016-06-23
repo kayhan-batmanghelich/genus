@@ -42,15 +42,27 @@ if __name__ == '__main__':
     import argparse
     defstr = '(default %(default)s)'
     parser = argparse.ArgumentParser()
-    parser.add_argument('-nr', '--numrepeats', type=int)
+    parser.add_argument('-n', '--numrepeats', type=int)
     parser.add_argument('-cn', '--colnums', type=int)
     parser.add_argument('-s', '--step', type=str)
+    parser.add_argument('-v', '--vbvs', type=str)
+    parser.add_argument('-g', '--gpml', type=str)
+    parser.add_argument('-d', '--depvb', type=str)
+    parser.add_argument('-c', '--comp', type=str)
     parser.add_argument('-o', '--outpath', type=str)
     args=parser.parse_args()
     numrepeats = args.numrepeats
     colnums = args.colnums
     step = args.step
+    vbvs = args.vbvs
+    gpml = args.gpml
+    depvb = args.depvb
+    comp = args.comp
     outpath = args.outpath
-    
+
+Setup.inputs.vbvs = vbvs
+Setup.inputs.gpml = gpml
+Setup.inputs.depvb = depvb
+Setup.inputs.comp = comp
 Setup.inputs.outpath = outpath
 Csv.inputs.colnums = colnums
