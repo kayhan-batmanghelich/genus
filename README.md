@@ -21,7 +21,7 @@
 
     python setup.py build --build-base="builddir" install --prefix="installdir"
 
-* "installdir" can be the path to a python environment created with anaconda
+* "installdir" can be the path to a python environment created with anaconda `/PHShome/ysa2/genus_env`
 
 
 
