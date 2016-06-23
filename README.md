@@ -11,6 +11,7 @@
 
     python setup.py build --build-base="builddir" install --prefix="installdir"
 
+    "installdir" can be the path to python environment created with anaconda
 
 
 
