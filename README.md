@@ -9,7 +9,7 @@
 
     wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
     bash Miniconda2-latest-Linux-x86_64.sh
-    conda create -p /PHShome/ysa2/genus_env python pip
+    conda create -p /PHShome/ysa2/genus_env python pip # this is just an example path
     cd /PHShome/ysa2/genus_env # just an example
     source activate .
     conda install pip pytables matplotlib scikit-learn seaborn pandas statsmodels cython sympy networkx 
