@@ -8,7 +8,7 @@ eng = matlab.engine.start_matlab()
 def setup(vbvs, gpml, depvb, outpath):
     import os
     for i in [vbvs, gpml, depvb]:
-        eng.addpath(vbvs, gpml, depvb)
+        eng.addpath(i)
     if gpml[-1] == '/':
         eng.run(gpml+'startup.m', nargout=0)
     else:
