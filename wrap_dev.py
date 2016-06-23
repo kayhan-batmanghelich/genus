@@ -5,7 +5,6 @@ import nipype.interfaces.io as nio
 
 eng = matlab.engine.start_matlab()
 
-
 def checkstr(string):
     if string[-1] == '/':
         return string
