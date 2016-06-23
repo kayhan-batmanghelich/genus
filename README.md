@@ -17,7 +17,7 @@
 
 #### To be able to use and import the matlab engine
 
-    cd "matlabroot\extern\engines\python"
+    cd "matlabroot/extern/engines/python"
     python setup.py build --build-base="builddir" install --prefix="installdir"
 
 * "installdir" can be the path to a python environment created with anaconda `/PHShome/ysa2/genus_env`
