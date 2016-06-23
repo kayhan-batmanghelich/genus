@@ -1,8 +1,7 @@
 '''
-currently runs step 'bf' and writes output file
+currently runs steps 'bf' and 'normalize
+
 next steps: 
-  check normalize step
-  create the cvs output
   check fxvb step
   add nipype into script for parallel processing
 '''
