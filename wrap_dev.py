@@ -30,4 +30,5 @@ def csv(colnums, matfiles):
     df = pd.DataFrame(columns=['colNum','matFn'])
     for i in range(colnums):
         df.loc[i] = [i, matfiles[i]]
+    df.iloc[:,0] = df.iloc[:,0].astype(int)
     return df 
