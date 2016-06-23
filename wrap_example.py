@@ -1,8 +1,7 @@
 '''
-currently runs steps 'bf' and 'normalize
+currently runs steps 'bf','normalize','fxvb' through
 
 next steps: 
-  check fxvb step
   add nipype into script for parallel processing
 '''
 
