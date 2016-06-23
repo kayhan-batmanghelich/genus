@@ -37,6 +37,20 @@ Csv = pd.Node(name='Csv',
              interface=Function(input_names=['colnums','matfiles'],
                                output_names=['df'],
                                function=csv))
+                               
+def runstep(step, infile, outfile, data, colnum):
+    eng.deployEndoPhenVB('step', step,
+                        'inputMat', infile,
+                        'colNum', colnum,
+                        'outFile', outfile,
+                        nargout = 0)
+
+Runstep = pe.Node(name='Runstep',
+                 interface=Function(input_names=['step',
+                'infile','outfile','data','colnum'],
+                output_names=[''],
+                        function=runstep))    
+    
  
 if __name__ == '__main__':
     import argparse
