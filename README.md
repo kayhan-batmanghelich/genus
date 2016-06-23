@@ -15,6 +15,15 @@
     conda install pip pytables matplotlib scikit-learn seaborn pandas statsmodels cython sympy networkx 
     pip install nibabel nipy nipype 
 
+#### Optional
+
+* create an alias in your ~/.bashrc to source the environment
+
+    vi ~/.bashrc
+    alias genv="source activate /PHShome/ysa2/genus_env"
+* save and exit. `source ~/.bashrc` and now `genv`
+
+
 #### To be able to use and import the matlab engine
 
     cd "matlabroot/extern/engines/python"
