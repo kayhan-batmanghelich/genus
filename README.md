@@ -30,6 +30,7 @@
     python setup.py build --build-base="builddir" install --prefix="installdir"
 
 * "installdir" can be the path to a python environment created with anaconda `/PHShome/ysa2/genus_env`
+* see the docs http://www.mathworks.com/help/matlab/matlab_external/install-matlab-engine-api-for-python-in-nondefault-locations.html
 
 
 
