@@ -49,8 +49,10 @@ Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=['step',
                 'infile','outfile','data','colnum'],
                 output_names=[''],
-                        function=runstep))    
-    
+                        function=runstep))  
+                        
+Runstep.iterables = ("colnum", [x for x in range(94)])  
+
 if __name__ == '__main__':
     import argparse
     defstr = '(default %(default)s)'
