@@ -37,7 +37,7 @@ Infosource = pe.Node(niu.IdentityInterface(fields=['step','infile',
 
 
 Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
-Infosource.iterables =[('colnum', [x for x in range(1, 95)])]
+Infosource.iterables =[('colnum', [x for x in range(1,95)])]
 
 
 
@@ -65,7 +65,7 @@ RunstepBF.inputs.vbvs = vbvs
 RunstepBF.inputs.gpml = gpml
 RunstepBF.inputs.depvb = depvb
 RunstepBF.inputs.comp = comp
-RunstepBF.inputs.outfile =  outfile
+RunstepBF.inputs.outfile = outfile
 RunstepBF.inputs.infile = infile
 RunstepBF.inputs.step = step
 
