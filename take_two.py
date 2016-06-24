@@ -20,7 +20,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', os.path.join('/om/user/ysa/testdir/new/',outnames(colnum, outname)),
+                        'outFile', os.path.join('/om/user/ysa/testdir/new/output',outnames(colnum, outname)),
                         nargout=0)
 
 Runstep = pe.Node(name='Runstep',
