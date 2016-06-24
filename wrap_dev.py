@@ -17,12 +17,12 @@ def setup(vbvs, gpml, depvb, comp, outpath):
         eng.addpath(i)
     eng.run(checkstr(gpml) + 'startup.m', nargout=0)
     os.chdir(outpath)
-    return output
+    #return output
     
 Setup = pe.Node(name='Setup',
                 interface=Function(input_names=['vbvs','gpml',
                                                 'depvb','comp','outpath'],
-                                        output_names=['outpath'],
+                                        output_names=[''],
                                         function=setup))
 
 def csv(colnums, matfiles):
