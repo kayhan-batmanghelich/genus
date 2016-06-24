@@ -37,7 +37,7 @@ Infosource = pe.Node(niu.IdentityInterface(fields=['step','infile',
 
 
 Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
-Infosource.iterables =[('colnum', [x for x in range(94)])]
+Infosource.iterables =[('colnum', [x for x in range(1, 95)])]
 
 
 
