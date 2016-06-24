@@ -5,7 +5,7 @@ import nipype.interfaces.utility as niu
 Reqpaths = pe.Node(IdentityInterface(fields=['paths']), name='Reqpaths')
 
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
-    import nipype.interfaces.matlab as matlab
+    import nipype.interfaces.matlab as Matlab
     import os
     def checkstr(string):
         if string[-1] == '/':
@@ -14,7 +14,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
             return string + '/'
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
-    matlab = matlab.MatlabCommand()
+    matlab = Matlab.MatlabCommand()
     matlab.inputs.paths = Reqpaths.inputs.paths
     matlab.inputs.script = """
                         arg_out = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
