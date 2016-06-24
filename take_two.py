@@ -11,8 +11,8 @@ def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
         else:
             return string + '/'
     def genoutfile(col):
-        return 'test%d.mat' % col 
-    #outfile = genoutfile(colnum)
+        return 'test{}.mat'.format(col)
+    outfile = genoutfile(colnum)
     eng = matlab.engine.start_matlab()
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
@@ -20,7 +20,7 @@ def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', genoutfile(colnum),
+                        'outFile', outfile,
                         nargout=0)
 
 RunstepBF = pe.Node(name='Runstep',
