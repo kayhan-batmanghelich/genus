@@ -18,7 +18,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     matlab.inputs.paths = Reqpaths.inputs.paths
     matlab.inputs.script = """
                         args = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
-                        """ % (step, infile, colnum, os.path.join(os.getcwd(),outnames(colnum, outname))) 
+                        """ % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
     res = matlab.run()
     
 Runstep = pe.Node(name='Runstep',
