@@ -4,6 +4,7 @@ import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
+    import os
     import matlab.engine
     eng = matlab.engine.start_matlab()
     def checkstr(string):
@@ -19,7 +20,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', outnames(colnum, outname),
+                        'outFile', os.path.join(os.getcwd(),outnames(colnum, outname)),
                         nargout=0)
 
 Runstep = pe.Node(name='Runstep',
