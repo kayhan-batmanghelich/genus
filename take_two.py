@@ -33,7 +33,13 @@ Runstep = pe.Node(name='Runstep',
 Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
 Infosource.iterables =[('colnum', [x for x in range(1, 95)])]
 
-
+def csv(colnums, matfiles):
+    import pandas as pd
+    df = pd.DataFrame(columns=['colNum','matFn'])
+    for i in range(colnums):
+        df.loc[i] = [i, matfiles[i]]
+    df.iloc[:,0] = df.iloc[:,0].astype(int)
+    return df
 
 if __name__ == '__main__':
     import argparse
