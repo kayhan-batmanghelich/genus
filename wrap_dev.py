@@ -51,7 +51,7 @@ RunstepBF = pe.Node(name='Runstep',
                 output_names=[''],
                         function=runstep))  
                         
-RunstepBF.iterables = ("colnum", [x for x in range(94)])  
+#RunstepBF.iterables = ("colnum", [x for x in range(94)])  
 
 if __name__ == '__main__':
     import argparse
