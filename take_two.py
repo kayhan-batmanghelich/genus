@@ -3,22 +3,24 @@ from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
-def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
+def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import matlab.engine
     eng = matlab.engine.start_matlab()
+    def outnames(col, outn):
+        return outn + '{}.mat'.format(col)
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
     eng.run(gpml + '/startup.m', nargout=0)
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', 'test{}.mat'.format(colnum),
+                        'outFile', outnames(colnum, outname),
                         nargout=0)
 
 RunstepBF = pe.Node(name='Runstep',
                  interface=Function(input_names=[
             'step','infile','outfile','colnum',
-            'vbvs', 'gpml', 'depvb', 'comp'],
+            'vbvs', 'gpml', 'depvb', 'comp', 'outname'],
                 output_names=[''],
                         function=runstep_bf))
 
@@ -37,7 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('-g', '--gpml', type=str, help='path to gpml directory')
     parser.add_argument('-d', '--depvb', type=str, help='path to where deployEndoPhenVB.m lives')
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
-    #parser.add_argument('-o', '--outfile', type=str, help='path for the output files')
+    parser.add_argument('-o', '--outname', type=str, help='template name for output files')
     parser.add_argument('-i', '--infile', type=str, help='data file')
     args=parser.parse_args()
     step = args.step
@@ -45,14 +47,14 @@ if __name__ == '__main__':
     gpml = args.gpml
     depvb = args.depvb
     comp = args.comp
-    #outfile = args.outfile
+    outfile = args.outname
     infile = args.infile
 
 RunstepBF.inputs.vbvs = vbvs
 RunstepBF.inputs.gpml = gpml
 RunstepBF.inputs.depvb = depvb
 RunstepBF.inputs.comp = comp
-#RunstepBF.inputs.outfile = outfile
+RunstepBF.inputs.outname = outname
 RunstepBF.inputs.infile = infile
 RunstepBF.inputs.step = step
 
