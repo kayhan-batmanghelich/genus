@@ -67,6 +67,7 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
     parser.add_argument('-o', '--outpath', type=str, help='path for the output files')
     parser.add_argument('-i', '--infile', type=str, help='the input file')
+    parser.add_argument('bfcn','--colnum', type=int, help='BF step column number')
     args=parser.parse_args()
     numrepeats = args.numrepeats
     colnums = args.colnums
@@ -77,6 +78,7 @@ if __name__ == '__main__':
     comp = args.comp
     outpath = args.outpath
     infile = args.infile
+    colnum = args.colnum
 
 Setup.inputs.vbvs = vbvs
 Setup.inputs.gpml = gpml
@@ -86,6 +88,7 @@ Setup.inputs.outpath = outpath
 Csv.inputs.colnums = colnums
 RunstepBF.inputs.step = step
 RunstepBF.inputs.infile = infile
+RunstepBF.inputs.colnum = colnum
 
 wf = pe.Workflow(name='wf')
 wf.base_dir = outpath
