@@ -4,13 +4,15 @@ import nipype.pipeline.engine as pe
 import nipype.interfaces.io as nio
 import nipype.interfaces.utility as niu
 
-def runstep_bf(step, infile, outfile, colnum, vbvs, gpml, depvb, comp):
+def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
     import matlab.engine
     def checkstr(string):
         if string[-1] == '/':
             return string
         else:
             return string + '/'
+    def genoutfile(col):
+        return 'test{}.mat'.format(colnum)
     eng = matlab.engine.start_matlab()
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
@@ -18,7 +20,7 @@ def runstep_bf(step, infile, outfile, colnum, vbvs, gpml, depvb, comp):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', outfile,
+                        'outFile', genoutfile(colnum),
                         nargout=0)
 
 RunstepBF = pe.Node(name='Runstep',
@@ -65,5 +67,4 @@ RunstepBF.inputs.step = step
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
 wf.connect(Infosource, 'colnum', RunstepBF, 'colnum')
-wf.connect(Infosource, 'outfile', RunstepBF, 'outfile')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
