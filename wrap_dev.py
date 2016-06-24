@@ -39,7 +39,7 @@ Csv = pd.Node(name='Csv',
                                output_names=['df'],
                                function=csv))
                                
-def runstep_bf(step, infile, outfile, data, colnum):
+def runstep_bf(step, infile, outfile, colnum):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
@@ -48,7 +48,7 @@ def runstep_bf(step, infile, outfile, data, colnum):
 
 RunstepBF = pe.Node(name='Runstep',
                  interface=Function(input_names=['step',
-                'infile','outfile','data','colnum'],
+                'infile','outfile','colnum'],
                 output_names=[''],
                         function=runstep))  
                         
