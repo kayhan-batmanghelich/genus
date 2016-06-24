@@ -3,7 +3,7 @@ from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
-def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
+def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import matlab.engine
     eng = matlab.engine.start_matlab()
     def checkstr(string):
@@ -22,7 +22,7 @@ def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
                         'outFile', outnames(colnum, outname),
                         nargout=0)
 
-RunstepBF = pe.Node(name='Runstep',
+Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
             'step','infile','outfile','colnum',
             'vbvs', 'gpml', 'depvb', 'comp', 'outname'],
@@ -55,15 +55,15 @@ if __name__ == '__main__':
     outname = args.outname
     infile = args.infile
 
-RunstepBF.inputs.vbvs = vbvs
-RunstepBF.inputs.gpml = gpml
-RunstepBF.inputs.depvb = depvb
-RunstepBF.inputs.comp = comp
-RunstepBF.inputs.outname = outname
-RunstepBF.inputs.infile = infile
-RunstepBF.inputs.step = step
+Runstep.inputs.vbvs = vbvs
+Runstep.inputs.gpml = gpml
+Runstep.inputs.depvb = depvb
+Runstep.inputs.comp = comp
+Runstep.inputs.outname = outname
+Runstep.inputs.infile = infile
+Runstep.inputs.step = step
 
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
-wf.connect(Infosource, 'colnum', RunstepBF, 'colnum')
+wf.connect(Infosource, 'colnum', Runstep, 'colnum')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
