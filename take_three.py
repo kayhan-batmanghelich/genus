@@ -1,12 +1,11 @@
 from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
-import nipype.interfaces.matlab as matlab
 
 Reqpaths = pe.Node(IdentityInterface(fields=['paths']), name='Reqpaths')
-Reqpaths.inputs.paths = []
 
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
+    import nipype.interfaces.matlab as matlab
     import os
     def checkstr(string):
         if string[-1] == '/':
@@ -15,7 +14,13 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
             return string + '/'
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
-
+    matlab = matlab.MatlabCommand()
+    matlab.inputs.paths = Reqpaths.inputs.paths
+    matlab.inputs.script = """
+                        arg_out = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
+                        """ % (step, infile, colnum, os.path.join(os.getcwd(),outnames(colnum, outname))) 
+    res = matlab.run()
+    
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
             'step','infile','outfile','colnum',
@@ -55,6 +60,7 @@ if __name__ == '__main__':
     outname = args.outname
     infile = args.infile
 
+Reqpaths.inputs.paths = [vbvs, gpml, depvb, comp]
 Runstep.inputs.vbvs = vbvs
 Runstep.inputs.gpml = gpml
 Runstep.inputs.depvb = depvb
@@ -62,6 +68,7 @@ Runstep.inputs.comp = comp
 Runstep.inputs.outname = outname
 Runstep.inputs.infile = infile
 Runstep.inputs.step = step
+
 
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
