@@ -17,12 +17,13 @@ def setup(vbvs, gpml, depvb, comp, outpath):
         eng.addpath(i)
     eng.run(checkstr(gpml) + 'startup.m', nargout=0)
     os.chdir(outpath)
-    #return output
+    out = checkstr(outpath) + 'bfout.mat'
+    return out
     
 Setup = pe.Node(name='Setup',
                 interface=Function(input_names=['vbvs','gpml',
                                                 'depvb','comp','outpath'],
-                                        output_names=[''],
+                                        output_names=['out'],
                                         function=setup))
 
 def csv(colnums, matfiles):
@@ -65,6 +66,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--depvb', type=str, help='path to where deployEndoPhenVB.m lives')
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
     parser.add_argument('-o', '--outpath', type=str, help='path for the output files')
+    parser.add_argument('-i', '--infile', type=str, help='the input file')
     args=parser.parse_args()
     numrepeats = args.numrepeats
     colnums = args.colnums
@@ -81,9 +83,11 @@ Setup.inputs.depvb = depvb
 Setup.inputs.comp = comp
 Setup.inputs.outpath = outpath
 Csv.inputs.colnums = colnums
+RunstepBF.inputs.step = step
 
 wf = pe.Workflow(name='wf')
 wf.base_dir = outpath
 
 wf.run()
+wf.connect(Setup,'out', RunstepBF,'outfile')
 wf.write_graph()
