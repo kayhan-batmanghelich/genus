@@ -6,11 +6,16 @@ import nipype.interfaces.utility as niu
 def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import matlab.engine
     eng = matlab.engine.start_matlab()
+    def checkstr(string):
+        if string[-1] == '/':
+            return string
+        else:
+            return string + '/'
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
-    eng.run(gpml + '/startup.m', nargout=0)
+    eng.run(checkstr(gpml) + 'startup.m', nargout=0)
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
