@@ -2,7 +2,7 @@ from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
-Reqpaths = pe.Node(IdentityInterface(fields=['paths']), name='Reqpaths')
+Reqpaths = pe.Node(niu.IdentityInterface(fields=['paths']), name='Reqpaths')
 
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import nipype.interfaces.matlab as Matlab
