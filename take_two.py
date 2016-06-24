@@ -27,19 +27,8 @@ RunstepBF = pe.Node(name='Runstep',
                 output_names=[''],
                         function=runstep_bf))
 
-'''
-Infosource = pe.Node(niu.IdentityInterface(fields=['step','infile',
-                                                  'outfile','colnum',
-                                                  'vbvs','gpml',
-                                                  'depvb','comp']), 
-                     name = 'Infosource')
-'''
-
-
 Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
 Infosource.iterables =[('colnum', [x for x in range(1,95)])]
-
-
 
 if __name__ == '__main__':
     import argparse
