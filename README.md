@@ -18,6 +18,9 @@
 #### Optional
 
     vi ~/.bashrc
+    
+    #add the line below
+    
     alias genv="source activate /PHShome/ysa2/genus_env"
     
     
