@@ -11,7 +11,7 @@ def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
         else:
             return string + '/'
     def genoutfile(col):
-        return 'test{}.mat'.format(col)
+        return 'test%d.mat' % col 
     #outfile = genoutfile(colnum)
     eng = matlab.engine.start_matlab()
     for i in [vbvs, gpml, depvb, comp]:
