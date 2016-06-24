@@ -1,7 +1,6 @@
 
 from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
-import nipype.interfaces.io as nio
 import nipype.interfaces.utility as niu
 
 def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
