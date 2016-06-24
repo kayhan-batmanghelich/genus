@@ -5,22 +5,14 @@ import nipype.interfaces.utility as niu
 
 def runstep_bf(step, infile, colnum, vbvs, gpml, depvb, comp):
     import matlab.engine
-    def checkstr(string):
-        if string[-1] == '/':
-            return string
-        else:
-            return string + '/'
-    def genoutfile(col):
-        return 'test{}.mat'.format(col)
-    outfile = genoutfile(colnum)
     eng = matlab.engine.start_matlab()
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
-    eng.run(checkstr(gpml) + 'startup.m', nargout=0)
+    eng.run(gpml + '/startup.m', nargout=0)
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
-                        'outFile', outfile,
+                        'outFile', 'test{}.mat'.format(colnum),
                         nargout=0)
 
 RunstepBF = pe.Node(name='Runstep',
