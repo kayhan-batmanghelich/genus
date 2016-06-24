@@ -38,20 +38,20 @@ Csv = pd.Node(name='Csv',
                                output_names=['df'],
                                function=csv))
                                
-def runstep(step, infile, outfile, data, colnum):
+def runstep_bf(step, infile, outfile, data, colnum):
     eng.deployEndoPhenVB('step', step,
                         'inputMat', infile,
                         'colNum', colnum,
                         'outFile', outfile,
                         nargout = 0)
 
-Runstep = pe.Node(name='Runstep',
+RunstepBF = pe.Node(name='Runstep',
                  interface=Function(input_names=['step',
                 'infile','outfile','data','colnum'],
                 output_names=[''],
                         function=runstep))  
                         
-Runstep.iterables = ("colnum", [x for x in range(94)])  
+RunstepBF.iterables = ("colnum", [x for x in range(94)])  
 
 if __name__ == '__main__':
     import argparse
