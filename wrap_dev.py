@@ -87,7 +87,6 @@ RunstepBF.inputs.step = step
 
 wf = pe.Workflow(name='wf')
 wf.base_dir = outpath
-
-wf.run()
 wf.connect(Setup,'out', RunstepBF,'outfile')
+wf.run()
 wf.write_graph()
