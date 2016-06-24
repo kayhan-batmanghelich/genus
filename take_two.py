@@ -41,8 +41,7 @@ def csv(colnum, outname):
         df.loc[i] = [i, outname+'{}.mat'.format(i)]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
     df.to_csv('BFResults.csv')
-    
-csv(95, outname)
+
 
 if __name__ == '__main__':
     import argparse
@@ -71,6 +70,8 @@ Runstep.inputs.comp = comp
 Runstep.inputs.outname = outname
 Runstep.inputs.infile = infile
 Runstep.inputs.step = step
+
+csv(95, outname)
 
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
