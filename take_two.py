@@ -45,7 +45,7 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--depvb', type=str, help='path to where deployEndoPhenVB.m lives')
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
     parser.add_argument('-o', '--outname', type=str, help='template name for output files')
-    parser.add_argument('-i', '--infile', type=str, help='data file')
+    parser.add_argument('-i', '--infile', type=str, help='input data file')
     args=parser.parse_args()
     step = args.step
     vbvs = args.vbvs
