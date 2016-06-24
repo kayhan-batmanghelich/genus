@@ -47,7 +47,7 @@ if __name__ == '__main__':
     gpml = args.gpml
     depvb = args.depvb
     comp = args.comp
-    outfile = args.outname
+    outname = args.outname
     infile = args.infile
 
 RunstepBF.inputs.vbvs = vbvs
