@@ -28,7 +28,7 @@ Runstep = pe.Node(name='Runstep',
             'step','infile','outfile','colnum',
             'vbvs', 'gpml', 'depvb', 'comp', 'outname'],
                 output_names=[''],
-                        function=runstep_bf))
+                        function=runstep))
 
 
 Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
