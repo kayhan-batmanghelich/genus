@@ -67,7 +67,7 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
     parser.add_argument('-o', '--outpath', type=str, help='path for the output files')
     parser.add_argument('-i', '--infile', type=str, help='the input file')
-    parser.add_argument('bfcn','--colnum', type=int, help='BF step column number')
+    parser.add_argument('-bfcn','--colnum', type=int, help='BF step column number')
     args=parser.parse_args()
     numrepeats = args.numrepeats
     colnums = args.colnums
