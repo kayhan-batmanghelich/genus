@@ -29,9 +29,8 @@ RunstepBF = pe.Node(name='Runstep',
                         function=runstep_bf))
 
 
-Infosource = pe.Node(niu.IdentityInterface(fields=['colnum','outfile']), name = 'Infosource')
-Infosource.iterables =[('colnum', [x for x in range(1, 95)]), 
-                      ('outfile', ['test%d.mat' % x for x in range(1, 95)])]
+Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
+Infosource.iterables =[('colnum', [x for x in range(1, 95)])]
 
 
 
