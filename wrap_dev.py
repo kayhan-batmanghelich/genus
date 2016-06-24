@@ -50,7 +50,7 @@ RunstepBF = pe.Node(name='Runstep',
                  interface=Function(input_names=['step',
                 'infile','outfile','colnum'],
                 output_names=[''],
-                        function=runstep))  
+                        function=runstep_bf))  
                         
 #RunstepBF.iterables = ("colnum", [x for x in range(94)])  
 
