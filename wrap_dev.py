@@ -76,6 +76,7 @@ if __name__ == '__main__':
     depvb = args.depvb
     comp = args.comp
     outpath = args.outpath
+    infile = args.infile
 
 Setup.inputs.vbvs = vbvs
 Setup.inputs.gpml = gpml
@@ -84,6 +85,7 @@ Setup.inputs.comp = comp
 Setup.inputs.outpath = outpath
 Csv.inputs.colnums = colnums
 RunstepBF.inputs.step = step
+RunstepBF.inputs.infile = infile
 
 wf = pe.Workflow(name='wf')
 wf.base_dir = outpath
