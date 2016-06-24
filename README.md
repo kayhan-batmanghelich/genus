@@ -47,5 +47,5 @@ http://www.gaussianprocess.org/gpml/code/matlab/doc/
 
 #### Example use
 
-    srun --mem=8G python attmpt2.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'bf' -i /om/user/ysa/genus/adni/natureImput-ChrAll_Data94.mat -o 'natureimpdata94'
+    srun --mem=8G python wrap.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'bf' -i /om/user/ysa/genus/adni/natureImput-ChrAll_Data94.mat -o 'natureimpdata94'
 
