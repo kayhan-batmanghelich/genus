@@ -65,7 +65,7 @@ RunstepBF.inputs.vbvs = vbvs
 RunstepBF.inputs.gpml = gpml
 RunstepBF.inputs.depvb = depvb
 RunstepBF.inputs.comp = comp
-RunstepBF.inputs.outfile = str(colnum) + outfile
+RunstepBF.inputs.outfile =  outfile
 RunstepBF.inputs.infile = infile
 RunstepBF.inputs.step = step
 
