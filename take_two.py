@@ -27,8 +27,12 @@ RunstepBF = pe.Node(name='Runstep',
                 output_names=[''],
                         function=runstep_bf))
 
-Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
-Infosource.iterables =[('colnum', [x for x in range(1,95)])]
+
+Infosource = pe.Node(niu.IdentityInterface(fields=['colnum','outfile']), name = 'Infosource')
+Infosource.iterables =[('colnum', [x for x in range(1, 95)]), 
+                      ('outfile', ['test%d.mat' % x for x in range(1, 95)])]
+
+
 
 if __name__ == '__main__':
     import argparse
@@ -39,7 +43,7 @@ if __name__ == '__main__':
     parser.add_argument('-g', '--gpml', type=str, help='path to gpml directory')
     parser.add_argument('-d', '--depvb', type=str, help='path to where deployEndoPhenVB.m lives')
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
-    parser.add_argument('-o', '--outfile', type=str, help='path for the output files')
+    #parser.add_argument('-o', '--outfile', type=str, help='path for the output files')
     parser.add_argument('-i', '--infile', type=str, help='data file')
     args=parser.parse_args()
     step = args.step
@@ -47,18 +51,19 @@ if __name__ == '__main__':
     gpml = args.gpml
     depvb = args.depvb
     comp = args.comp
-    outfile = args.outfile
+    #outfile = args.outfile
     infile = args.infile
 
 RunstepBF.inputs.vbvs = vbvs
 RunstepBF.inputs.gpml = gpml
 RunstepBF.inputs.depvb = depvb
 RunstepBF.inputs.comp = comp
-RunstepBF.inputs.outfile = outfile
+#RunstepBF.inputs.outfile = outfile
 RunstepBF.inputs.infile = infile
 RunstepBF.inputs.step = step
 
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
 wf.connect(Infosource, 'colnum', RunstepBF, 'colnum')
-wf.run('SLURM', plugin_args={'sbatch_args': '-N1 -c2 --mem=8G'})
+wf.connect(Infosource, 'outfile', RunstepBF, 'outfile')
+wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
