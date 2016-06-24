@@ -81,3 +81,9 @@ Setup.inputs.depvb = depvb
 Setup.inputs.comp = comp
 Setup.inputs.outpath = outpath
 Csv.inputs.colnums = colnums
+
+wf = pe.Workflow(name='wf')
+wf.base_dir = outpath
+
+wf.run()
+wf.write_graph()
