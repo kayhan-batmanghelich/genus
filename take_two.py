@@ -1,4 +1,3 @@
-# runs smoothly, and quicker than other methods i've tried but does not write to file
 from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
