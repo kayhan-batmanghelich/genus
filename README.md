@@ -2,7 +2,7 @@
 
 
 *************************** 
-### Steps needed to run wrap.py
+### Steps needed to run wrap[something].py
 ***************************
 
 #### Set up python
