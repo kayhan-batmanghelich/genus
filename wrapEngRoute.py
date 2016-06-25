@@ -41,8 +41,8 @@ Runstep = pe.Node(name='Runstep',
                         function=runstep))
 
 
-Infosource = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Infosource')
-Infosource.iterables =[('colnum', [x for x in range(1, 95)])]
+Iternode = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode')
+Iternode.iterables =[('colnum', [x for x in range(1, 95)])]
 
 def csv(colnum, outname):
     import pandas as pd
@@ -93,5 +93,5 @@ elif step == 'normalize':
     wf.base_dir = '/om/user/ysa/testdir/new/output/norm/'
 elif step == 'fxvb':
     wf.base_dir = '/om/user/ysa/testdir/new/output/fxvb/'
-wf.connect(Infosource, 'colnum', Runstep, 'colnum')
+wf.connect(Iternode, 'colnum', Runstep, 'colnum')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
