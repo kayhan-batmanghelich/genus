@@ -17,9 +17,13 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     matlab = Matlab.MatlabCommand()
     matlab.inputs.paths = [vbvs, gpml, depvb, comp]
     if step == 'bf':
-        matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inputMat','%s', 'colNum',%d, 'outfile','%s' );""" % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname)))
+        matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inputMat','%s', 'colNum',%d, 'outfile','%s' );""" % (step, 
+        infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname)))
     elif step == 'normalize':
-        matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inputMat','%s', 'colNum',%d, 'outfile','%s' );""" % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
+        matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inFile','%s','outfile','%s' );""" % (step, 
+        os.path.join('/om/user/ysa/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/',outnames(colnum, outname)))
+    elif step == 'fxvb':
+        pass
     matlab.inputs.mfile=True
     res = matlab.run()
     
