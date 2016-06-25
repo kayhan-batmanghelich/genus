@@ -16,11 +16,17 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     for i in [vbvs, gpml, depvb, comp]:
         eng.addpath(i)
     eng.run(checkstr(gpml) + 'startup.m', nargout=0)
-    eng.deployEndoPhenVB('step', step,
-                        'inputMat', infile,
-                        'colNum', colnum,
-                        'outFile', os.path.join('/om/user/ysa/testdir/new/output',outnames(colnum, outname)),
-                        nargout=0)
+    if step == 'bf':
+        eng.deployEndoPhenVB('step', step,
+                            'inputMat', infile,
+                            'colNum', colnum,
+                            'outFile', os.path.join('/om/user/ysa/testdir/new/output',outnames(colnum, outname)),
+                            nargout=0)
+    elif step == 'normalize':
+            eng.deployEndoPhenVB('step', step,
+                                'inFile', os.path.join('/om/user/ysa/testdir/new/output',outnames(colnum, outname)),
+                                'outFile', os.path.join('/om/user/ysa/testdir/new/output',outnames(colnum, outname)),
+                                nargout=0)
 
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
