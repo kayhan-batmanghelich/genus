@@ -39,7 +39,7 @@ def csv(colnum, outname):
     for i in range(1,colnum):
         df.loc[i] = [i, outname+'{}.mat'.format(i)]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
-    df.to_csv('BFResults.csv')
+    df.to_csv('BFResults.csv', index=False)
 
 
 if __name__ == '__main__':
