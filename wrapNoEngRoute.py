@@ -4,7 +4,7 @@ import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
 
-def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile):
+def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None):
     import nipype.interfaces.matlab as Matlab
     import os
     def outnames(col, outn):
@@ -26,7 +26,8 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile):
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
             'step','infile','outfile','colnum',
-            'vbvs', 'gpml', 'depvb', 'comp', 'outname'],
+            'vbvs', 'gpml', 'depvb', 'comp', 'outname'
+            'csvfile'],
                 output_names=[''],
                         function=runstep))
 
