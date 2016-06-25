@@ -4,7 +4,7 @@ import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
 
-def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
+def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile):
     import nipype.interfaces.matlab as Matlab
     import os
     def outnames(col, outn):
@@ -53,6 +53,7 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--comp', type=str, help='path to where computeGPLnZHelper.m lives')
     parser.add_argument('-o', '--outname', type=str, help='template name for output files')
     parser.add_argument('-i', '--infile', type=str, help='input data file')
+    parser.add_argument('-csv', '--csvfile', type=str, help="a BFResults csv file created at the 'bf' step")
     args=parser.parse_args()
     step = args.step
     vbvs = args.vbvs
@@ -61,6 +62,7 @@ if __name__ == '__main__':
     comp = args.comp
     outname = args.outname
     infile = args.infile
+    csvfile = args.csvfile
 
 Runstep.inputs.vbvs = vbvs
 Runstep.inputs.gpml = gpml
@@ -69,6 +71,7 @@ Runstep.inputs.comp = comp
 Runstep.inputs.outname = outname
 Runstep.inputs.infile = infile
 Runstep.inputs.step = step
+Runstep.inputs.csvfile = csvfile
 
 csv(95, outname)
 
