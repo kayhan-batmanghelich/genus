@@ -70,7 +70,10 @@ Runstep.inputs.outname = outname
 Runstep.inputs.infile = infile
 Runstep.inputs.step = step
 
-csv(95, outname)
+if step == 'bf':
+    csv(95, outname)
+else:
+    pass
 
 wf = pe.Workflow(name="wf")
 wf.base_dir = '/om/user/ysa/testdir/new'
