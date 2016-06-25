@@ -17,7 +17,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     matlab = Matlab.MatlabCommand()
     matlab.inputs.paths = [vbvs, gpml, epvb, comp]
     matlab.inputs.script = """
-                        args = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
+                    deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
                         """ % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
     matlab.inputs.mfile=True
     res = matlab.run()
