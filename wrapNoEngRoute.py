@@ -15,16 +15,14 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
     matlab = Matlab.MatlabCommand()
-<<<<<<< HEAD
     matlab.inputs.paths = [vbvs, gpml, depvb, comp]
     matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inputMat','%s', 'colNum',%d, 'outfile','%s' );""" % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
-=======
     matlab.inputs.paths = [vbvs, gpml, epvb, comp]
     matlab.inputs.script = """
                     deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
                         """ % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
     matlab.inputs.mfile=True
->>>>>>> cbd3b609b1205f845bb2d559374e0be511fe3ea2
+
     res = matlab.run()
     
 Runstep = pe.Node(name='Runstep',
