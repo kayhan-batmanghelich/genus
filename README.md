@@ -27,7 +27,7 @@
 * save and exit. `source ~/.bashrc` and now `genv`
 
 
-#### To be able to use and import the matlab engine
+#### To be able to use and import the matlab engine if you are using wrapEngRoute.py, otherwise skip this
 
     cd "matlabroot/extern/engines/python"
     python setup.py build --build-base="builddir" install --prefix="installdir"
