@@ -2,7 +2,6 @@ from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
 
-Reqpaths = pe.Node(niu.IdentityInterface(fields=['paths']), name='Reqpaths')
 
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import nipype.interfaces.matlab as Matlab
@@ -15,7 +14,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
     matlab = Matlab.MatlabCommand()
-    matlab.inputs.paths = Reqpaths.inputs.paths
+    matlab.inputs.paths = [vbvs, gpml, epvb, comp]
     matlab.inputs.script = """
                         args = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
                         """ % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
@@ -61,7 +60,6 @@ if __name__ == '__main__':
     outname = args.outname
     infile = args.infile
 
-Reqpaths.inputs.paths = [vbvs, gpml, depvb, comp]
 Runstep.inputs.vbvs = vbvs
 Runstep.inputs.gpml = gpml
 Runstep.inputs.depvb = depvb
