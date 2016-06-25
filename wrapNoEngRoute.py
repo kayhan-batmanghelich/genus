@@ -7,11 +7,6 @@ import nipype.interfaces.utility as niu
 def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     import nipype.interfaces.matlab as Matlab
     import os
-    def checkstr(string):
-        if string[-1] == '/':
-            return string
-        else:
-            return string + '/'
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
     matlab = Matlab.MatlabCommand()
