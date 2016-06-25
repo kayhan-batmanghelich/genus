@@ -1,4 +1,4 @@
-# currently broken
+# seems to work now
 from nipype.interfaces.utility import Function
 import nipype.pipeline.engine as pe
 import nipype.interfaces.utility as niu
@@ -15,11 +15,8 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
     def outnames(col, outn):
         return outn + '{}.mat'.format(col)
     matlab = Matlab.MatlabCommand()
-    matlab.inputs.paths = [vbvs, gpml, epvb, comp]
-    matlab.inputs.script = """
-                        args = deployEndoPhenVB('step',%s, 'inputMat',%s, 'colNum',%d, 'outfile':%s );
-                        """ % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
-    matlab.inputs.mfile=True
+    matlab.inputs.paths = [vbvs, gpml, depvb, comp]
+    matlab.inputs.script = """deployEndoPhenVB('step','%s', 'inputMat','%s', 'colNum',%d, 'outfile','%s' );""" % (step, infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname))) 
     res = matlab.run()
     
 Runstep = pe.Node(name='Runstep',

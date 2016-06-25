@@ -24,13 +24,14 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
                             outnames(colnum, outname)),
                             nargout=0)
     elif step == 'normalize':
-            eng.deployEndoPhenVB('step', step,
-                                'inFile', os.path.join('/om/user/ysa/testdir/new/output',
-                                outnames(colnum, outname)),
-                                'outFile', os.path.join('/om/user/ysa/testdir/new/output',
-                                outnames(colnum, outname)),
-                                nargout=0)
+         eng.deployEndoPhenVB('step', step,
+                             'inFile', os.path.join('/om/user/ysa/testdir/new/output',
+                             outnames(colnum, outname)),
+                             'outFile', os.path.join('/om/user/ysa/testdir/new/output',
+                             outnames(colnum, outname)),
+                             nargout=0)
     elif step == 'fxvb':
+        pass
 
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
@@ -86,6 +87,11 @@ else:
     pass
 
 wf = pe.Workflow(name="wf")
-wf.base_dir = '/om/user/ysa/testdir/new'
+if step == 'bf':
+    wf.base_dir = '/om/user/ysa/testdir/new'
+elif step == 'normalize':
+    wf.base_dir = '/om/user/ysa/testdir/new/output/norm/'
+elif step == 'fxvb':
+    wf.base_dir = '/om/user/ysa/testdir/new/output/fxvb/'
 wf.connect(Infosource, 'colnum', Runstep, 'colnum')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
