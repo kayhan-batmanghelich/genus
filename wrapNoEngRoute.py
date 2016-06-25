@@ -19,7 +19,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname):
         os.path.join('/om/user/ysa/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/',outnames(colnum, outname)))
     elif step == 'fxvb':
         matlab.inputs.scripts = """deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','numRepeats',%d)"""%(
-            step, csvfile, 2194, infile, os.path.join('/om/user/ysa/testdir/fxvb/', outnames(colnum, outname)), 20)
+            step, csvfile, 2194, infile, os.path.join('/om/user/ysa/testdir/fxvb/', 'fxvb'+outnames(colnum, outname)), 20)
     matlab.inputs.mfile=True
     res = matlab.run()
     
