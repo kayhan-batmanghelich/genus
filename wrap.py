@@ -23,6 +23,8 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None
             step, csvfile, 2194, infile, os.path.join('/om/user/ysa/testdir/fxvb/', 'fxvb_'+outnames(colnum, outname)), 20)
     matlab.inputs.mfile=True
     res = matlab.run()
+    print matlab.inputs.script
+    print res.runtime.stdout
     
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
