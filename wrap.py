@@ -40,7 +40,7 @@ def csv(colnum, outname):
     import os
     df = pd.DataFrame(columns=['colNum','matFn'])
     for i in range(1,colnum):
-        df.loc[i] = [i, os.path.join(os.getcwd(),outname+'{}.mat'.format(i))]
+        df.loc[i] = [i, os.path.join('/om/user/ysa/',outname+'{}.mat'.format(i))]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
     df.to_csv('BFResults.csv', index=False)
 
