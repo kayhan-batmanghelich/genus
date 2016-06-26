@@ -26,7 +26,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None
 Runstep = pe.Node(name='Runstep',
                  interface=Function(input_names=[
             'step','infile','colnum',
-            'vbvs', 'gpml', 'depvb', 'comp', 'outname'
+            'vbvs', 'gpml', 'depvb', 'comp', 'outname',
             'csvfile'],
                 output_names=[''],
                         function=runstep))
