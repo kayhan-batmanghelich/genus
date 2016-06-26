@@ -18,7 +18,7 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None
         matlab.inputs.script = """deployEndoPhenVB('step','%s','inFile','%s','outFile','%s')"""%(step, 
         os.path.join('/om/user/ysa/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/',outnames(colnum, outname)))
     elif step == 'fxvb':
-        matlab.inputs.scripts = """deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','numRepeats',%d)"""%(
+        matlab.inputs.script = """run('/om/user/ysa/genus/bayes/basis/gpml/startup.m');deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','outFile','%s','numRepeats',%d)"""%(
             step, csvfile, 2194, infile, os.path.join('/om/user/ysa/testdir/fxvb/', 'fxvb_'+outnames(colnum, outname)), 20)
     matlab.inputs.mfile=True
     res = matlab.run()
