@@ -2,7 +2,7 @@
 
 
 *************************** 
-### Steps needed to run wrap[something].py
+### Steps needed to run wrap.py
 ***************************
 
 #### Set up python
@@ -26,18 +26,7 @@
     
 * save and exit. `source ~/.bashrc` and now `genv`
 
-
-#### If you are using wrapEngRoute.py, otherwise skip this
-
-    cd "matlabroot/extern/engines/python"
-    python setup.py build --build-base="builddir" install --prefix="installdir"
-
-* "installdir" can be the path to a python environment created with anaconda `/PHShome/ysa2/genus_env`
-* refer to the documentation http://www.mathworks.com/help/matlab/matlab_external/install-matlab-engine-api-for-python-in-nondefault-locations.html
-
-
-
-#### Other matlab dependencies
+#### Matlab dependencies
 
 * download both from the links below, make sure to run the install.m file in the varbvs download. this will require a gcc version of 4.7.x
 
