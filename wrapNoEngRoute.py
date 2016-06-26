@@ -31,15 +31,15 @@ Runstep = pe.Node(name='Runstep',
                 output_names=[''],
                         function=runstep))
 
-
 Iternode = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode')
 Iternode.iterables =[('colnum', [x for x in range(1, 95)])]
 
 def csv(colnum, outname):
     import pandas as pd
+    import os
     df = pd.DataFrame(columns=['colNum','matFn'])
     for i in range(1,colnum):
-        df.loc[i] = [i, outname+'{}.mat'.format(i)]
+        df.loc[i] = [i, os.path.join(os.getcwd(),outname+'{}.mat'.format(i))]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
     df.to_csv('BFResults.csv', index=False)
 
@@ -74,9 +74,14 @@ Runstep.inputs.infile = infile
 Runstep.inputs.step = step
 Runstep.inputs.csvfile = csvfile
 
-csv(95, outname)
 
-wf = pe.Workflow(name="wf")
+if step == 'normalize':
+    wf = pe.Workflow(name="wf_norm")
+elif step == 'fxvb':
+    wf = pe.Workflow(name="wf_fxvb")
+else:
+    csv(95, outname)
+    wf = pe.Workflow(name="wf_bf")
 wf.base_dir = '/om/user/ysa/testdir/new'
 wf.connect(Iternode, 'colnum', Runstep, 'colnum')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
