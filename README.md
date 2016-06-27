@@ -42,4 +42,4 @@ http://www.gaussianprocess.org/gpml/code/matlab/doc/
 
 * normalize step
 
-    srun --mem=8G python wrap.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'normalize' -o 'natureimpdata94_'
+    srun --mem=8G python wrap.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'normalize' -o 'natureImput-ChrAll_94_'
