@@ -16,7 +16,8 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None
         infile, colnum, os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)))
     elif step == 'normalize':
         matlab.inputs.script = """deployEndoPhenVB('step','%s','inFile','%s','outFile','%s')"""%(step, 
-        os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/testdir/bfoutput',outnames(colnum, outname)))
+        os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)) ,
+        os.path.join('/om/user/ysa/testdir/bfoutput',outnames(colnum, outname)))
     elif step == 'fxvb':
         matlab.inputs.script = """run('/om/user/ysa/genus/bayes/basis/gpml/startup.m');
         deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','outFile','%s','numRepeats',%d)"""%(
