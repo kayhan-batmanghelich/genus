@@ -13,10 +13,10 @@ def runstep(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=None
     matlab.inputs.paths = [vbvs, gpml, depvb, comp]
     if step == 'bf':
         matlab.inputs.script = """deployEndoPhenVB('step','%s','inputMat','%s','colNum',%d,'outFile','%s')"""%(step, 
-        infile, colnum, os.path.join('/om/user/ysa/',outnames(colnum, outname)))
+        infile, colnum, os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)))
     elif step == 'normalize':
         matlab.inputs.script = """deployEndoPhenVB('step','%s','inFile','%s','outFile','%s')"""%(step, 
-        os.path.join('/om/user/ysa/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/',outnames(colnum, outname)))
+        os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)) , os.path.join('/om/user/ysa/testdir/bfoutput',outnames(colnum, outname)))
     elif step == 'fxvb':
         matlab.inputs.script = """run('/om/user/ysa/genus/bayes/basis/gpml/startup.m');
         deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','outFile','%s','numRepeats',%d)"""%(
@@ -42,9 +42,9 @@ def csv(colnum, outname):
     import os
     df = pd.DataFrame(columns=['colNum','matFn'])
     for i in range(1,colnum):
-        df.loc[i] = [i, os.path.join('/om/user/ysa/',outname+'{}.mat'.format(i))]
+        df.loc[i] = [i, os.path.join('/om/user/ysa/testdir/bfoutput/',outname+'{}.mat'.format(i))]
     df.iloc[:,0] = df.iloc[:,0].astype(int)
-    df.to_csv('BFResults.csv', index=False)
+    df.to_csv('BFResultsFileList.csv', index=False)
 
 if __name__ == '__main__':
     import argparse
