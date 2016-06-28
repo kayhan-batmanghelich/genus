@@ -11,14 +11,13 @@ def runbfnorm(step, infile, colnum, vbvs, gpml, depvb, comp, outname, csvfile=No
         return outn + '{}.mat'.format(col)
     matlab = Matlab.MatlabCommand()
     matlab.inputs.paths = [vbvs, gpml, depvb, comp]
-    if step[0] == 'bf':
-        matlab.inputs.script = """
-        deployEndoPhenVB('step','%s','inputMat','%s','colNum',%d,'outFile','%s');
-        deployEndoPhenVB('step','%s','inFile','%s','outFile','%s')"""%(step[0], 
-        infile, colnum, os.path.join('/om/user/ysa/testdir/bfoutput/',
-        outnames(colnum, outname)),step[1], 
-        os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)),
-        os.path.join('/om/user/ysa/testdir/bfoutput',outnames(colnum, outname))))
+    matlab.inputs.script = """
+    deployEndoPhenVB('step','%s','inputMat','%s','colNum',%d,'outFile','%s');
+    deployEndoPhenVB('step','%s','inFile','%s','outFile','%s')"""%(step[0], 
+    infile, colnum, os.path.join('/om/user/ysa/testdir/bfoutput/',
+    outnames(colnum, outname)),step[1], 
+    os.path.join('/om/user/ysa/testdir/bfoutput/',outnames(colnum, outname)),
+    os.path.join('/om/user/ysa/testdir/bfoutput',outnames(colnum, outname))))
     matlab.inputs.mfile=True
     res = matlab.run()
     print matlab.inputs.script
@@ -34,6 +33,21 @@ RunBFNorm = pe.Node(name='RunBFNorm',
 
 Iternode = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode')
 Iternode.iterables =[('colnum', [x for x in range(1, 95)])]
+
+def runfxvb(step, csvfile, infile, seed, outfile):
+    import nipype.interfaces.matlab as Matlab
+    import os
+    def outnames(col, outn):
+        return outn + '{}.mat'.format(col)
+    matlab = Matlab.MatlabCommand()
+    matlab.inputs.paths = [vbvs, gpml, depvb, comp]
+    matlab.inputs.script = """run('/om/user/ysa/genus/bayes/basis/gpml/startup.m');
+     deployEndoPhenVB('step','%s','csvFile','%s','randomSeed',%d,'inputMat','%s','outFile','%s','numRepeats',%d)"""%(
+    tep, csvfile, seed, infile, os.path.join('/om/user/ysa/testdir/fxvb/', 'fxvb_'+outnames(colnum, outname)), 20)
+    matlab.inputs.mfile=True
+    res = matlab.run()
+    print matlab.inputs.script
+    print res.runtime.stdout
 
 def csv(colnum, outname):
     import pandas as pd
