@@ -31,10 +31,10 @@ RunBFNorm = pe.Node(name='RunBFNorm',
                 output_names=[''],
                         function=runbfnorm))
 
-Iternode = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode')
-Iternode.iterables =[('colnum', [x for x in range(1, 95)])]
+Iternode1 = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode1')
+Iternode1.iterables =[('colnum', [x for x in range(1, 95)])]
 
-def runfxvb(step, csvfile, infile, seed, outfile):
+def runfxvb(step, csvfile, infile, seed, ouname):
     import nipype.interfaces.matlab as Matlab
     import os
     def outnames(col, outn):
@@ -48,6 +48,18 @@ def runfxvb(step, csvfile, infile, seed, outfile):
     res = matlab.run()
     print matlab.inputs.script
     print res.runtime.stdout
+
+Runfxvb = pe.Node(name='Runfxvb',
+                 interface=Function(input_names=[
+            'step','csvfile','infile','seed', 
+            'vbvs', 'gpml', 'depvb', 'comp', 
+            'outname',
+            ],
+                output_names=[''],
+                        function=runfxvb))
+
+Iternode2 = pe.Node(niu.IdentityInterface(fields=['colnum']), name = 'Iternode2')
+Iternode2.iterables =[('seed', [2134, 2135, 2453, 2543, 2331, 5432, 1123, 2443])]
 
 def csv(colnum, outname):
     import pandas as pd
@@ -96,5 +108,5 @@ else:
     csv(95, outname)
     wf = pe.Workflow(name="wf_bfnorm")
 wf.base_dir = '/om/user/ysa/testdir/new'
-wf.connect(Iternode, 'colnum', Runstep, 'colnum')
+wf.connect(Iternode1, 'colnum', Runstep, 'colnum')
 wf.run('SLURM', plugin_args={'sbatch_args': '-c2 --mem=8G'})
