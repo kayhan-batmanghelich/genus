@@ -43,8 +43,8 @@ bdgen = '/om/user/ysa/genus_dev/{}/cobg_dir_genome_wide/'
 eurgen = bdgen.format('genus1_imp_eur_1000GP_P1_allchr')
 allgen = bdgen.format('genus1_imp_all_1000GP_P1_allchr')
 
+# 1149 participants
 data_exist_fs = [
-    # 1149 participants
     'scz_camh_eur_gb-qc.hg19.ch.fl.bgn.reid.fam',
     'scz_umcu_eur_gb-qc.hg19.ch.fl.bgn.reid.fam',
     'scz_nefs_eur_gb-qc.hg19.ch.fl.bgn.reid.fam',
