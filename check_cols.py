@@ -13,15 +13,6 @@ def lin_dep(data):
 
 I = lin_dep(I)
 
-# check that you actually dropped the linearly dependent columns
-def val_lin_dep(data):
-    if  np.linalg.matrix_rank(data):
-        print("colinearity removed")
-    else:
-        print("matrix is not linearly independent")
-
-val_lin_dep(I)
-
 I = I - I.mean(0) # mean center
 
 I = (I - I.min(0)) / I.ptp(0)  # apply normalization
