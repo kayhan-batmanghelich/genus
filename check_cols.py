@@ -8,9 +8,11 @@ I = data['I']
 def lin_dep(data):
     R = linalg.qr(data)[1]
     ind_cols = np.where(np.abs(R.diagonal()) > 0)[0]
-    return data[:, ind_cols]
+    cols = np.array([x for x in data.shape[1]])
+    dep_cols = sorted(list(set(cols) - set(ind_cols)))
+    return data[:, ind_cols], dep_cols
     
-I = lin_dep(I)
+I = lin_dep(I)[0]
 
 I = I - I.mean(0) # mean center
 
