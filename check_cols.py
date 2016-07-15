@@ -10,7 +10,7 @@ def lin_dep(data):
     R = linalg.qr(data)[1]
     ind_cols = np.where(np.abs(R.diagonal()) > 0)[0]
     return data[:, ind_cols]
-
+    
 I = lin_dep(I)
 
 I = I - I.mean(0) # mean center
