@@ -1,6 +1,5 @@
 import numpy as np
 import scipy.io
-import pandas as pd
 
 # find linearly dependent columns and remove them
 data = scipy.io.loadmat('scz_eur_pgc_annealed.mat')
