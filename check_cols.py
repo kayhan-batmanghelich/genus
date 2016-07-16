@@ -6,7 +6,7 @@ data = scipy.io.loadmat('scz_eur_pgc_annealed.mat')
 I = data['I']
 
 def lin_dep(data):
-    R = linalg.qr(data)[1]
+    R = np.linalg.qr(data)[1]
     ind_cols = np.where(np.abs(R.diagonal()) > 0)[0]
     cols = np.array([x for x in range(data.shape[1])])
     dep_cols = sorted(list(set(cols) - set(ind_cols)))
