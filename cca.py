@@ -2,7 +2,7 @@ import numpy as np
 
 def lin_dep(data):
     '''
-    ind_cols: linearly independent columns(features)
+    ind_cols: linearly independent columns (features)
     dep_cols: linearly dependent columns
     '''
     R = np.linalg.qr(data)[1]
