@@ -30,3 +30,16 @@ covary = np.cov(Y, rowvar=False)
 covarxy = np.cov(X,Y, rowvar=False)
 
 
+'''
+vanilla cca
+'''
+def cca(X,Y):
+    X_row, X_col = X.shape
+    Y_col = Y.shape[1]
+    X_ = X - X.mean(0)
+    Y_ = Y - Y.mean(0)
+    q_x, r_x, p_x = linalg.qr(X,mode='economic', pivoting=True)
+    rank_x = np.linalg.matrix_rank(r_x)
+    q_y, r_y, p_y = linalg.qr(Y, mode='economic', pivoting=True)
+    rank_y = np.linalg.matrix_rank(r_y)
+    d = np.min([rank_x, rank_y])
