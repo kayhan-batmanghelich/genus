@@ -23,7 +23,7 @@ False: rows are observations, columns are variables
 
 
 This does not work as you cannot multiply:
-covarx**(-1/2) * covarxy * covary(-1/2)
+covarx**(-1/2) * covarxy * covary**(-1/2)
 '''
 covarx = np.cov(X, rowvar=False)
 covary = np.cov(Y, rowvar=False)
