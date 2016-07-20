@@ -33,13 +33,26 @@ covarxy = np.cov(X,Y, rowvar=False)
 '''
 vanilla cca
 '''
-def cca(X,Y):
-    X_row, X_col = X.shape
-    Y_col = Y.shape[1]
+
+def demean(X,Y):
     X_ = X - X.mean(0)
     Y_ = Y - Y.mean(0)
-    q_x, r_x, p_x = linalg.qr(X,mode='economic', pivoting=True)
-    rank_x = np.linalg.matrix_rank(r_x)
-    q_y, r_y, p_y = linalg.qr(Y, mode='economic', pivoting=True)
-    rank_y = np.linalg.matrix_rank(r_y)
-    d = np.min([rank_x, rank_y])
+    return X_, Y_
+
+class cca(object):
+    
+    def val_args(self, X, Y):
+        X_row, X_col = X.shape
+        Y_col = Y.shape[1]
+        
+    def demean(self, X, Y):
+        X = X - X.mean(0)
+        Y = Y - Y.mean(0)
+        return X, Y
+    
+    def rank(self, X, Y):
+        q_x, r_x, p_x = linalg.qr(X,mode='economic', pivoting=True)
+        q_y, r_y, p_y = linalg.qr(Y, mode='economic', pivoting=True)
+        rank_x = np.linalg.matrix_rank(r_x)
+        rank_y = np.linalg.matrix_rank(r_y)
+        
