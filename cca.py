@@ -1,8 +1,13 @@
-class cca(object):
     import numpy as np
     from scipy import linalg
+
+class cca(object):
+    '''
+    work in progress
+    canonical correlation analysis
+    '''
     
-    def __init__(self):
+    def __init__(self, **kwargs):
         
     
     def lin_dep(data):
