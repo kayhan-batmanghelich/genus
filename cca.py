@@ -28,7 +28,7 @@ class cca(object):
         return X, Y
     
     def rank(self, X, Y):
-        q_x, r_x, p_x = linalg.qr(X,mode='economic', pivoting=True)
+        q_x, r_x, p_x = linalg.qr(X, mode='economic', pivoting=True)
         q_y, r_y, p_y = linalg.qr(Y, mode='economic', pivoting=True)
         rank_x = np.linalg.matrix_rank(r_x)
         rank_y = np.linalg.matrix_rank(r_y)
