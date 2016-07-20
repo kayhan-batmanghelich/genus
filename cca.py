@@ -8,6 +8,7 @@ class cca(object):
     '''
     
     def __init__(self, **kwargs):
+        self.cca_type = cca_type
         
     
     def lin_dep(data):
