@@ -7,7 +7,7 @@ references:
   Rencher, C.A., Methods of Multivariate Analysis,
   John Wiley & Sons, Inc, 2002.
 
-  Lin, D. et. al., Group sparse canonical correlation analysis for genomic data integration,
+  Lin, D., et. al., Group sparse canonical correlation analysis for genomic data integration,
   BMC Bioinformatic, 2013.
 '''
 
