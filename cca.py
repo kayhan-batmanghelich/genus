@@ -4,7 +4,7 @@ from scipy import linalg
 '''
 references: 
 
-  Rencher, C.A., Methods of Multivariate Analysis Second Edition,
+  Rencher, C.A., Methods of Multivariate Analysis,
   John Wiley & Sons, Inc, 2002.
 
   Lin, D. et. al., Group sparse canonical correlation analysis for genomic data integration,
