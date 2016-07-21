@@ -26,8 +26,8 @@ def cca(X,Y,type=None):
     
     def val_args(X, Y):
         X_row, X_col = X.shape
-        Y_col = Y.shape[1]
-        return [(X_row, X_col), Y_col]
+        Y_row, Y_col = Y.shape
+        return [(X_row, X_col), (Y_row, Y_col)]
         
     def demean(X, Y):
         X = X - X.mean(0)
