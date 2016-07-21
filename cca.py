@@ -6,9 +6,6 @@ def cca(X,Y,type=None):
     work in progress
     canonical correlation analysis
     '''
-
-        
-    
     def lin_dep(data):
         R = np.linalg.qr(data)[1]
         ind_cols = np.where(np.abs(R.diagonal()) > 0)[0]
@@ -35,4 +32,3 @@ def cca(X,Y,type=None):
         rank_x = np.linalg.matrix_rank(r_x)
         rank_y = np.linalg.matrix_rank(r_y)
         return rank_x, rank_y
-        
