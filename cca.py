@@ -1,6 +1,17 @@
 import numpy as np
 from scipy import linalg
 
+'''
+references: 
+
+  Rencher, C.A., Methods of Multivariate Analysis Second Edition,
+  John Wiley & Sons, Inc, 2002.
+
+  Lin, D. et. al., Group sparse canonical correlation analysis for genomic data integration,
+  BMC Bioinformatic, 2013.
+'''
+
+
 def cca(X,Y,type=None):
     '''
     work in progress
