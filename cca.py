@@ -50,11 +50,28 @@ sparse canonical correlation analysis
 X = np.array([np.random.normal(size=100) for x in range(1000)]).T
 Y = np.array([np.random.normal(size=100) for x in range(2000)]).T
 
+X_col = X.shape[1]
+Y_col = Y.shape[1]
+
 C_xx = np.cov(X, rowvar=False)**(-1/2)
 C_yy = np.cov(Y, rowvar=False)**(-1/2)
-C_xy = np.cov(X,Y, rowvar=False)[:1000,1000:]
+C_xy = np.cov(X,Y, rowvar=False)[:X_col,X_col:]
+
+'''
+np.cov(X,Y, rowvar=False) will return a partioned matrix:
+
+XX|XY
+-----
+YY|YX
+
+'''
+
+print(np.allclose(np.cov(X, rowvar=False), 
+                  np.cov(X,Y, rowvar=False)[:X_col,:X_col]))
+
 K_tmp = np.dot(C_xx,  C_xy)
 K = np.dot(K_tmp, C_yy) # equation 2
 K_trans_K = np.dot(K.T, K)
-eighval, eighvec = linalg.eigh(K_trans_K)
+eighval, eighvec = linalg.eigh(K_trans_K) 
 d = np.sqrt(eighval)
+beta = np.dot(C_yy, eighvec)
