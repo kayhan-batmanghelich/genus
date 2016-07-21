@@ -71,7 +71,6 @@ print(np.allclose(np.cov(X, rowvar=False),
 
 K_tmp = np.dot(C_xx,  C_xy)
 K = np.dot(K_tmp, C_yy) # equation 2
-K_trans_K = np.dot(K.T, K)
 u, d, v = linalg.svd(K)
 alpha = np.dot(C_xx, u)
 beta = np.dot(C_yy, v)
