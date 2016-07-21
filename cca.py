@@ -4,7 +4,7 @@ from scipy import linalg
 def cca(X,Y,type=None):
     '''
     work in progress
-    canonical correlation analysis
+    vanilla canonical correlation analysis
     '''
     def lin_dep(data):
         R = np.linalg.qr(data)[1]
@@ -32,3 +32,17 @@ def cca(X,Y,type=None):
         rank_x = np.linalg.matrix_rank(r_x)
         rank_y = np.linalg.matrix_rank(r_y)
         return rank_x, rank_y
+        
+'''
+sparse canonical correlation analysis
+'''
+X = np.array([np.random.normal(size=100) for x in range(1000)]).T
+Y = np.array([np.random.normal(size=100) for x in range(2000)]).T
+
+C_xx = np.cov(X, rowvar=False)**(-1/2)
+C_yy = np.cov(Y, rowvar=False)**(-1/2)
+C_xy = np.cov(X,Y, rowvar=False)[:1000,1000:]
+K_tmp = np.dot(C_xx,  C_xy)
+K = np.dot(K_tmp, C_yy) # equation 2
+K_trans_K = np.dot(K.T, K)
+eighval, eighvec = linalg.eigh(K_trans_K) # eighval == d
