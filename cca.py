@@ -45,4 +45,5 @@ C_xy = np.cov(X,Y, rowvar=False)[:1000,1000:]
 K_tmp = np.dot(C_xx,  C_xy)
 K = np.dot(K_tmp, C_yy) # equation 2
 K_trans_K = np.dot(K.T, K)
-eighval, eighvec = linalg.eigh(K_trans_K) # eighval == d
+eighval, eighvec = linalg.eigh(K_trans_K)
+d = np.sqrt(eighval)
