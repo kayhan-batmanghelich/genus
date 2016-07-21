@@ -71,7 +71,7 @@ print(np.allclose(np.cov(X, rowvar=False),
 
 K_tmp = np.dot(C_xx,  C_xy)
 K = np.dot(K_tmp, C_yy) # equation 2
-u, d, v = linalg.svd(K)
-alpha = np.dot(C_xx, u)
-beta = np.dot(C_yy, v)
+u, d, v = linalg.svd(K) # equation 2
+alpha = np.dot(C_xx, u) # equation 3
+beta = np.dot(C_yy, v) # equation 3
 r = np.linalg.matrix_rank(np.dot(X.T, Y))
