@@ -32,14 +32,3 @@
 
 https://github.com/pcarbo/varbvs/tree/c24049a5bc9532dae4f7f2d81df50ca877a47a6d
 http://www.gaussianprocess.org/gpml/code/matlab/doc/
-
-
-#### Example use
-
-* bayes factor step
-
-    srun --mem=8G python wrap.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'bf' -i /om/user/ysa/genus/adni/natureImput-ChrAll_Data94.mat -o 'natureimpdata94_'
-
-* normalize step
-
-    srun --mem=8G python wrap.py -v /om/user/ysa/genus/bayes/Carbonetto_VBS/MATLAB -g /om/user/ysa/genus/bayes/basis/gpml -d /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src -c /om/user/ysa/genus/bayes/basis/bayesianImagingGenetics/src/Utils -s 'normalize' -o 'natureImput-ChrAll_94_'
