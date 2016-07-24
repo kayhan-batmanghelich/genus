@@ -13,7 +13,7 @@
     cd /PHShome/ysa2/genus_env # just an example
     source activate .
     conda install pip pytables matplotlib scikit-learn seaborn pandas statsmodels cython sympy networkx 
-    pip install nibabel nipy nipype 
+    pip install nibabel nipy nipype scipy numpy
 
 #### Optional
 
