@@ -52,7 +52,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import linalg
 
-
 X = np.array([np.random.normal(size=100) for x in range(500)]).T
 Y = np.array([np.random.normal(size=100) for x in range(700)]).T
 
