@@ -47,16 +47,17 @@ def cca(X,Y,ccatype=None):
 '''
 sparse canonical correlation analysis
 '''
-X = np.array([np.random.normal(size=100) for x in range(1000)]).T
-Y = np.array([np.random.normal(size=100) for x in range(2000)]).T
+%matplotlib inline
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import linalg
+
+
+X = np.array([np.random.normal(size=100) for x in range(500)]).T
+Y = np.array([np.random.normal(size=100) for x in range(700)]).T
 
 X_row, X_col = X.shape
 Y_row, Y_col = Y.shape
-
-C_xx = np.cov(X, rowvar=False)**(-1/2)
-C_yy = np.cov(Y, rowvar=False)**(-1/2)
-C_xy = np.cov(X,Y, rowvar=False)[:X_col,X_col:]
-
 '''
 np.cov(X,Y, rowvar=False) will return a partioned matrix:
 
@@ -65,23 +66,20 @@ XX|XY
 YY|YX
 
 '''
-# a check of the above
-print(np.allclose(np.cov(X, rowvar=False), 
-                  np.cov(X,Y, rowvar=False)[:X_col,:X_col]))
+C_xx = np.cov(X, rowvar=False)
+C_yy = np.cov(Y, rowvar=False)
+C_xy = np.cov(X,Y, rowvar=False)[:X_col,X_col:]
 
-# using the covariance matrices
-K_tmp = np.dot(C_xx,  C_xy)
-K = np.dot(K_tmp, C_yy) # equation 2
-u, d, v = linalg.svd(K) # equation 2
-alpha = np.dot(C_xx, u) # equation 3
-beta = np.dot(C_yy, v) # equation 3
-r = np.linalg.matrix_rank(np.dot(X.T, Y))
+xI = np.eye(X_col) 
+yI = np.eye(Y_col) 
+'''
+∥∥K−duvt∥∥2F + Ψ(u) + Φ(v) s.t. ∥u∥22=1, ∥v∥22=1 (4)
 
-# Lin, et. al. suggests replacing covariance matrices with identity matrices
-xI = np.eye(X_col)
-yI = np.eye(Y_col)
-kI_tmp = np.dot(xI, C_xy)
-kI = np.dot(kI_tmp, yI)
-uI, dI, vI = linalg.svd(kI)
-alphaI = np.dot(xI, uI)
-betaI = np.dot(yI, vI)
+'''
+K = np.dot(np.dot(xI, C_xy), yI)
+r = np.linalg.matrix_rank(K)
+u, d, v = linalg.svd(np.dot(K.T, K))
+u, d, v = u[:r], d[:r], v[:r]
+duvT = np.dot(np.dot(d,u), v.T)
+K_minus_duvT = np.subtract(K[:r].T, duvT)
+n_K = np.linalg.norm(K_minus_duvT, 'fro')
