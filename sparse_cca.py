@@ -15,8 +15,6 @@ XX|XY
 -----
 YY|YX
 '''
-C_xx = np.cov(X, rowvar=False)
-C_yy = np.cov(Y, rowvar=False)
 C_xy = np.cov(X,Y, rowvar=False)[:X_col,X_col:]
 
 xI = np.eye(X_col) 
