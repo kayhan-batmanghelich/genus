@@ -36,5 +36,5 @@ def update(K, vec, lambda_val):
     vec_sparse = norm(vec_sparse)
     return vec_sparse
 
-update(K_c.T, update(K_c, v, 1.8), 1.8)
+update(K_c.T, update(K_c, v, lambda_u), lambda_v)
 
