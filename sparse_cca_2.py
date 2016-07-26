@@ -10,7 +10,6 @@ C_ab = np.cov(A, B, rowvar=False)[:A_col,A_col:]
 C_ba = C_ab.T
 C_aa = np.cov(A, rowvar=False)
 C_bb = np.cov(B, rowvar=False)
-
 '''
 from: 
 Sparse Canonical Correlation Analysis
