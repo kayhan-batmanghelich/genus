@@ -17,6 +17,7 @@ C_bb = np.cov(B, rowvar=False)
 from: 
 Sparse Canonical Correlation Analysis
 with Application to Genomic Data Integration
+Parkhomenko et al.
 ''' 
 C_aa_diag = np.diag(np.diag(C_aa))
 C_bb_diag = np.diag(np.diag(C_bb))
