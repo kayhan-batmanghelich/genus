@@ -32,7 +32,7 @@ def update(K, vec, lambda_val):
         return x / np.linalg.norm(x, ord=1)
     vec_sparse = np.dot(K, vec)
     vec_sparse = norm(vec_sparse)
-    vec_sparse = np.subtract(np.abs(vec_sparse), .5*lambda_val) + np.sign(vec_sparse)
+    vec_sparse = np.abs(vec_sparse) - .5*lambda_val + np.sign(vec_sparse)
     vec_sparse = norm(vec_sparse)
     return vec_sparse
 
