@@ -6,6 +6,9 @@ B = np.array([np.random.normal(size=4) for x in range(5)]).T
 A_row, A_col = A.shape
 B_row, B_col = B.shape
 
+def demean(x):
+    return x - x.mean(0)
+
 C_ab = np.cov(A, B, rowvar=False)[:A_col,A_col:]
 C_ba = C_ab.T
 C_aa = np.cov(A, rowvar=False)
