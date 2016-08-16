@@ -21,3 +21,19 @@ def random_forest(X, y_, k):
     best_params = rfclf.best_params_
     prediction = rfclf.predict(X_test)
     return search_scores, best_score, best_params, prediction, y_test
+    
+    
+    
+    X_train, X_test, y_train, y_test = train_test_split(
+                X, y_, test_size=.3, random_state=1)
+    brfclf = RandomForestClassifier(criterion=best_params['criterion'],
+                                    max_features=best_params['max_features'],
+                                    max_depth=best_params['max_depth'],
+                                    n_estimators=best_params['n_estimators'],
+                                    random_state=1)
+                                    
+                                    
+                                    
+    brfclf.fit(X_train, y_train)
+    prediction = brfclf.predict(X_test)
+    feat_importance = brfclf.feature_importances_
