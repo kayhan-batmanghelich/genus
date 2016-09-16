@@ -34,6 +34,8 @@ def getFam(directory, site):
 def removallNaN(fam, phen, id1, id2):
     try:
         matched = phen.set_index(id1).loc[fam[id2]]
+        matched.drop_duplicates(subset='IID', inplace=True)
+        matched.drop('IID', 1, inplace=True)
         droplist = []
         for idx in matched.index:
             droplist.append(all(pd.isnull(matched.loc[idx])))
