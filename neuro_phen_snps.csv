@@ -1,4 +1,4 @@
-,"('IID', 'IID')","('IID', 'FID')","('FID', 'FID')","('FID', 'IID')","('IID', 'IID')","('IID', 'FID')","('FID', 'FID')","('FID', 'IID')",snp_count,people_count
+,IID_IID_N,IID_FID_N,FID_FID_N,FID_IID_N,IID_IID_P,IID_FID_P,FID_FID_P,FID_IID_P,snp_count,ppl_count
 scz_deco_all_gb-qc.hg19.ch.fl.bgn.reid,380.0,,380.0,,117.0,,127.0,,7330822,497
 scz_page_all_gb-qc.hg19.ch.fl.bgn.reid,474.0,431.0,474.0,431.0,,,,,7330822,483
 scz_gapl_all_gb-qc.hg19.ch.fl.bgn.reid,,,,,,,,,7330822,256
