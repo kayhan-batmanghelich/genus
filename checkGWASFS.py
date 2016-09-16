@@ -29,6 +29,7 @@ datadir = '/data/petryshen/yoel/20160823/all/'
 def getFam(directory, site):
     f = pd.read_csv(os.path.join(directory, site+'.fam'), header=None, sep=' ')
     f.columns = ['FID', 'IID', 'PaternalID', 'MaternalID', 'sex', 'affected']
+    print("{}".format(site))
     return f
 
 def removallNaN(fam, phen, id1, id2):
