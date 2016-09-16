@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 
-
 sites = [
 'scz_camh_all_gb-qc.hg19.ch.fl.bgn.reid',
 'scz_cati_all_gb-qc.hg19.ch.fl.bgn.reid',
