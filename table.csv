@@ -1,3 +1,7 @@
-,freesurfer
-scz_camh_all_gb-qc.hg19.ch.fl.bgn.reid,191
-scz_lanr_all_gb-qc.hg19.ch.fl.bgn.reid,63
+,freesurfer,snp
+scz_camh_all_gb-qc.hg19.ch.fl.bgn.reid,191,202
+scz_lanr_all_gb-qc.hg19.ch.fl.bgn.reid,63,
+scz_cati_all_gb-qc.hg19.ch.fl.bgn.reid,not_found,
+scz_cida_all_gb-qc.hg19.ch.fl.bgn.reid,173,
+scz_deco_all_gb-qc.hg19.ch.fl.bgn.reid,153,
+scz_page_all_gb-qc.hg19.ch.fl.bgn.reid,
