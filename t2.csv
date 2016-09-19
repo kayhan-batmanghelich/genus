@@ -1,7 +1,7 @@
 site,snp_neuropsych,snp_freesurfer,snp,freesurfer_neuropsych,snp_freesurfer_neuropsych
 scz_camh_all_gb-qc.hg19.ch.fl.bgn.reid,181,178,202,182,170
 scz_cati_all_gb-qc.hg19.ch.fl.bgn.reid,697,,715,,
-scz_cida_all_gb-qc.hg19.ch.fl.bgn.reid,166,97.0,196,90,81
+scz_cida_all_gb-qc.hg19.ch.fl.bgn.reid,166,97,196,90,81
 scz_cogs_all_gb-qc.hg19.ch.fl.bgn.reid,484,,565,,
 scz_deco_all_gb-qc.hg19.ch.fl.bgn.reid,380,117,497,23,22
 scz_gapl_all_gb-qc.hg19.ch.fl.bgn.reid,,,256,,
