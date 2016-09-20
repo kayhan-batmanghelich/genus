@@ -1,6 +1,6 @@
 site(set: all),snp_neuropsych,snp_freesurfer,snp,freesurfer_neuropsych,snp_freesurfer_neuropsych,freesurfer,neuropsych,site_participants,no_freesurfer
 camh,181.0,178.0,202,182.0,170.0,191.0,257.0,mixed,10
-cati,697.0,,715,,,,722.0,patient_only,697,
+cati,697.0,,715,,,,722.0,patient_only,697
 cida,166.0,97.0,196,90.0,81.0,173.0,183.0,mixed,85
 cogs,484.0,,565,,,,509.0,patient_only,484
 deco,380.0,117.0,497,23.0,22.0,150.0,407.0,mixed,358
