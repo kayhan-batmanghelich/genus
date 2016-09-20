@@ -1,12 +1,12 @@
 site(set: all),snp_neuropsych,snp_freesurfer,snp,freesurfer_neuropsych,snp_freesurfer_neuropsych,freesurfer,neuropsych
 camh,181,178,202,182,170,191,257
-cati*,697,,715,,,,722
+cati^,697,,715,,,,722
 cida,166,97,196,90,81,173,183
-cogs*,484,,565,,,,509
+cogs^,484,,565,,,,509
 deco,380,117,497,23,22,150,407
 gapl,,,256,,,,308
-imhs*,207,,210,111,,247,147
-imh4*,63,94,124,39,39,,414
+imhs^,207,,210,111,,247,414
+imh4^,63,94,124,39,39,,147
 lanr*,61,59,77,61,58,63,64
 mcic,,,150,,,,206
 mfs1,,,100,,,,
