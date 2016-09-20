@@ -1,4 +1,4 @@
-site(set: all),snp_neuropsych,snp_freesurfer,snp,freesurfer_neuropsych,snp_freesurfer_neuropsych,freesurfer,neuropsych,par_type(^=affected, *=control, @=mixed)
+site(set: all),snp_neuropsych,snp_freesurfer,snp,freesurfer_neuropsych,snp_freesurfer_neuropsych,freesurfer,neuropsych,par_type(^=affected *=control @=mixed)
 camh,181.0,178.0,202,182.0,170.0,191.0,257.0,@
 cati^,697.0,,715,,,,722.0,^
 cida,166.0,97.0,196,90.0,81.0,173.0,183.0,@
