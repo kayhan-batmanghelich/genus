@@ -60,14 +60,14 @@ Check_Assume = pe.Node(name='Check_Assume',
         imports=imports_data
     ))        
         
-def logistic_l1(X, y, C, n_splits=10, max_iter=1000):
+def logistic_l1(X, y, C):
     '''logistic regression, l1 penalty'''
     classifier_params = {'C': [], 'coef_':[], 'intercept_':[], 
                          'score': [], 'k':[], 'roc_auc_score': [],'n_iter_':[]}
-    stratkfold = StratifiedKFold(n_splits=n_splits, shuffle=False)
+    stratkfold = StratifiedKFold(n_splits=10, shuffle=False)
     model = linear_model.LogisticRegression(C=C, penalty='l1',
-                                            solver='liblinear',max_iter=max_iter)
-    for k, (train, test) in enumerate(startkfold.split(X, y)):
+                                            solver='liblinear',max_iter=1000)
+    for k, (train, test) in enumerate(stratkfold.split(X, y)):
         model.fit(X[train], y[train])
         classifier_params['C'].append(C)
         classifier_params['score'].append(model.score(X[test], y[test]))
@@ -80,8 +80,7 @@ def logistic_l1(X, y, C, n_splits=10, max_iter=1000):
 
 LogisticL1 = pe.Node(name='LogisticL1',
                         interface=Function(
-        input_names=['X', 'y', 'C',
-                     'n_splits', 'max_iter'],
+        input_names=['X', 'y', 'C'],
         output_names=['classifier_params'],
         function=logistic_l1,
         imports=imports_model
@@ -90,26 +89,30 @@ LogisticL1 = pe.Node(name='LogisticL1',
 Iternode = pe.Node(niu.IdentityInterface(fields=['C']), name='Iternode')
 Iternode.iterables = [('C', np.arange(0,1,.0005))]
 
-def save(classifier_params, datadir):
+def savefunc(classifier_params, datadir):
     os.chdir(datadir)
-    os.makedirs('l1_out')
     out = pd.DataFrame(classifier_params)
-    os.chdir('l1_out')
-    out.to_csv('{}_logreg_model.csv'.format(classifier_params['C']), index=None)
+    if not os.path.exists(os.path.join(datadir, 'l1_out')):
+        os.makedirs('l1_out')
+    if os.getcwd() != os.path.join(datadir, 'l1_out'):    
+        os.chdir(os.path.join(datadir, 'l1_out'))
+    out.to_csv('{}_logreg_model.csv'.format(classifier_params['C'][0]), index=None)
 
-Save = pe.Node(name='Save',
+Savefunc = pe.Node(name='Savefunc',
               interface=Function(
         input_names=['classifier_params','datadir'],
         output_names=[''],
-        funciton=save,
+        function=savefunc,
         imports=imports_data
     ))   
 
-Save.inputs.datadir = datadir
+Savefunc.inputs.datadir = datadir
     
 wf = pe.Workflow(name='log_test')
-wf.connect(Data, 'X', Check_Assume, 'X')
+#wf.connect(Data, 'X', Check_Assume, 'X')
 wf.connect(Data, 'X', LogisticL1, 'X')
 wf.connect(Data, 'y', LogisticL1, 'y')
 wf.connect(Iternode, 'C', LogisticL1, 'C')
-wf.connect(LogisticL1, 'classifier_params', Save, 'classifier_params')
+wf.connect(LogisticL1, 'classifier_params', Savefunc, 'classifier_params')
+wf.base_dir = '/om/user/ysa/test/logreg'
+wf.run(plugin="SLURM")
