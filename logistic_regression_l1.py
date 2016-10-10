@@ -114,5 +114,3 @@ wf.connect(Data, 'X', LogisticL1, 'X')
 wf.connect(Data, 'y', LogisticL1, 'y')
 wf.connect(Iternode, 'C', LogisticL1, 'C')
 wf.connect(LogisticL1, 'classifier_params', Savefunc, 'classifier_params')
-wf.base_dir = '/om/user/ysa/test/logreg'
-wf.run(plugin="SLURM")
