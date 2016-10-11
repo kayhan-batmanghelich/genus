@@ -45,11 +45,11 @@ for (x in 1:100) {
       class_best_lambdas[i] <- models_class[[i]]$lambda.min
     }
 
-    # cross-validate on the left out fold using lambdas from 4 models computed
+    # cross-validate on the left out fold using lambdas from the 3 models computed
     mod_auc_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='auc', lambda=auc_best_lambdas)
     mod_class_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='class', lambda=class_best_lambdas)
 
-    # final test set
+    # final test set on the 5th fold
     auc_pred <- predict(mod_auc_4, newx= X[Flds$Fold5,],  type="class")
     auc_accs[x] <- sum(as.numeric(auc_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
 
