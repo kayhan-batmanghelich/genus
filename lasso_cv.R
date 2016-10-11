@@ -37,13 +37,12 @@ for (x in 1:100) {
                          family='binomial',
                          type.measure='class',
                          nfolds=4)
-    }
-
-    # get the bestscores and lambdas
-    for (i in seq(3)) {
+        
+      # get the best lambdas 
       auc_best_lambdas[i] <- models_auc[[i]]$lambda.min
       class_best_lambdas[i] <- models_class[[i]]$lambda.min
     }
+
 
     # cross-validate on the left out fold using lambdas from the 3 models computed
     mod_auc_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='auc', lambda=auc_best_lambdas)
