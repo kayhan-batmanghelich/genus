@@ -1,4 +1,4 @@
-setwd('/data/petryshen/yoel/lasso')
+setwd('/Users/yoelsanchez/test')
 require(caret)
 require(glmnet)
 
@@ -15,5 +15,20 @@ if (dim(X)[1] != length(y)) {
     print("X and y have the same number of samples")
 }
 
-# performs stratified k fold 
-F <- createFolds(y, k=10, list=TRUE)
+# stratified k fold
+F <- createFolds(y, k=5, list=TRUE)
+
+# list to hold everything in
+models <- list()
+
+# format string
+fold_vars <- sprintf("F$Fold%01d", seq(5))
+
+for (i in seq(5)) {
+    mod <- cv.glmnet(X[eval(parse(text=fold_vars[i])),],
+                     y[eval(parse(text=fold_vars[i]))],
+                     family='binomial',
+                     type.measure='auc',
+                     n_folds=5)
+
+}
