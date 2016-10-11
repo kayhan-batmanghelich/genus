@@ -41,7 +41,7 @@ for (i in seq(3)) {
   class_best_lambdas[i] <- models_class[[i]]$lambda.min
 }
 
-# cross-validate on the left out fold using lambdas from 4 models computed
+# cross-validate on the left out fold using lambdas from 3 models computed
 mod_auc_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='auc', lambda=auc_best_lambdas)
 mod_class_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='class', lambda=class_best_lambdas)
 
