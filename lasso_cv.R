@@ -15,7 +15,7 @@ if (dim(X)[1] != length(y)) {
 auc_accs <- c()
 class_accs <- c()
 
-for (x in 1:30) {
+for (x in 1:100) {
     Flds <- createFolds(y, k=5, list=TRUE)
     models_auc <- list()
     models_class <- list()
