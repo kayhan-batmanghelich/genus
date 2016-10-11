@@ -1,7 +1,4 @@
 setwd('/data/petryshen/yoel/lasso')
-require(caret)
-require(glmnet)
-
 X <- read.csv('endo_mat_1035_170.csv')
 X <- as.matrix(sapply(X, as.matrix))
 y <- read.csv('reduced_y.txt', header=FALSE)
@@ -47,3 +44,10 @@ for (i in seq(3)) {
 # cross-validate on the left out fold using lambdas from 4 models computed
 mod_auc_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='auc', lambda=auc_best_lambdas)
 mod_class_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='class', lambda=class_best_lambdas)
+
+# final test set
+auc_pred <- predict(mod_auc_4, newx= X[Flds$Fold5,],  type="class")
+auc_acc <- sum(as.numeric(auc_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
+
+class_pred <- predict(mod_class_4, newx= X[Flds$Fold5,],  type="class")
+class_acc <- sum(as.numeric(class_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
