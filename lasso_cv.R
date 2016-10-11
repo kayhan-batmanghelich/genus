@@ -15,7 +15,7 @@ if (dim(X)[1] != length(y)) {
 auc_accs <- c()
 class_accs <- c()
 
-for (i in 1:30) {
+for (x in 1:30) {
     Flds <- createFolds(y, k=5, list=TRUE)
     models_auc <- list()
     models_class <- list()
@@ -51,9 +51,9 @@ for (i in 1:30) {
 
     # final test set
     auc_pred <- predict(mod_auc_4, newx= X[Flds$Fold5,],  type="class")
-    auc_accs[i] <- sum(as.numeric(auc_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
+    auc_accs[x] <- sum(as.numeric(auc_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
 
     class_pred <- predict(mod_class_4, newx= X[Flds$Fold5,],  type="class")
-    class_accs[i] <- sum(as.numeric(class_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
+    class_accs[x] <- sum(as.numeric(class_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
     
 }
