@@ -1,4 +1,4 @@
-setwd('/Users/yoelsanchez/test')
+setwd('/data/petryshen/yoel/lasso')
 require(caret)
 require(glmnet)
 
