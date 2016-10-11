@@ -20,6 +20,9 @@ models_auc <- list()
 models_class <- list()
 auc_best_scores <- c()
 class_best_scores <- c()
+auc_best_lambdas <- c()
+class_best_lambdas <- c()
+
 fold_vars <- sprintf("Flds$Fold%01d", seq(4))
 
 # compute models
@@ -41,11 +44,18 @@ for (i in seq(4)) {
 for (i in seq(4)) {                 
   auc_best_scores[i] <- max(models_auc[[i]]$cvm)
   class_best_scores[i] <- max(models_class[[i]]$cvm)
+  auc_best_lambdas[i] <- models_auc[[i]]$lambda.min
+  class_best_lambdas[i] <- models_class[[i]]$lambda.min
 }
 
 # find lambda.min that corresponds to the best score
 auc_score <- max(auc_best_scores)
-auc_position <- c()
-for (i in 1:4){
-    try(auc_position[[1]] <- which(models_auc[[i]]$cvm %in% auc_score), silent=TRUE)
-}
+auc_position <- which.max(auc_best_scores)
+auc_lambda <- models_auc[[auc_position]]$lambda.min
+class_score <- max(class_best_scores)
+class_position <- which.max(class_best_scores)
+class_lambda <- models_class[[class_position]]$lambda.min
+
+# run final models with cv using best lambdas
+aucCV <- cv.glmnet(X,y, family='binomial', type.measure='auc', lambda=auc_best_lambdas)
+classCV <- cv.glmnet(X,y, family='binomial', type.measure='class', lambda=class_best_lambdas)
