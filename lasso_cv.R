@@ -57,3 +57,10 @@ for (x in 1:100) {
     class_accs[x] <- sum(as.numeric(class_pred) == y[Flds$Fold5]) / length(y[Flds$Fold5])
     
 }
+
+
+#> mean(auc_accs)
+#[1] 0.6535266
+
+#> mean(class_accs)
+#[1] 0.6563768
