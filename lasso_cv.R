@@ -15,20 +15,37 @@ if (dim(X)[1] != length(y)) {
     print("X and y have the same number of samples")
 }
 
-# stratified k fold
-F <- createFolds(y, k=5, list=TRUE)
+Flds <- createFolds(y, k=4, list=TRUE)
+models_auc <- list()
+models_class <- list()
+auc_best_scores <- c()
+class_best_scores <- c()
+fold_vars <- sprintf("Flds$Fold%01d", seq(4))
 
-# list to hold everything in
-models <- list()
-
-# format string
-fold_vars <- sprintf("F$Fold%01d", seq(5))
-
-for (i in seq(5)) {
-    mod <- cv.glmnet(X[eval(parse(text=fold_vars[i])),],
+# compute models
+for (i in seq(4)) {
+    models_auc[[i]] <- cv.glmnet(X[eval(parse(text=fold_vars[i])),],
                      y[eval(parse(text=fold_vars[i]))],
                      family='binomial',
                      type.measure='auc',
-                     n_folds=5)
+                     nfolds=4)
 
+   models_class[[i]] <- cv.glmnet(X[eval(parse(text=fold_vars[i])),],
+                     y[eval(parse(text=fold_vars[i]))],
+                     family='binomial',
+                     type.measure='class',
+                     nfolds=4)
+}  
+
+# get the best scores of each model
+for (i in seq(4)) {                 
+  auc_best_scores[i] <- max(models_auc[[i]]$cvm)
+  class_best_scores[i] <- max(models_class[[i]]$cvm)
+}
+
+# find lambda.min that corresponds to the best score
+auc_score <- max(auc_best_scores)
+auc_position <- c()
+for (i in 1:4){
+    try(auc_position[[1]] <- which(models_auc[[i]]$cvm %in% auc_score), silent=TRUE)
 }
