@@ -15,18 +15,16 @@ if (dim(X)[1] != length(y)) {
     print("X and y have the same number of samples")
 }
 
-Flds <- createFolds(y, k=4, list=TRUE)
+Flds <- createFolds(y, k=5, list=TRUE)
 models_auc <- list()
 models_class <- list()
-auc_best_scores <- c()
-class_best_scores <- c()
 auc_best_lambdas <- c()
 class_best_lambdas <- c()
 
-fold_vars <- sprintf("Flds$Fold%01d", seq(4))
+fold_vars <- sprintf("Flds$Fold%01d", seq(5))
 
 # compute models
-for (i in seq(4)) {
+for (i in seq(3)) {
     models_auc[[i]] <- cv.glmnet(X[eval(parse(text=fold_vars[i])),],
                      y[eval(parse(text=fold_vars[i]))],
                      family='binomial',
@@ -38,24 +36,14 @@ for (i in seq(4)) {
                      family='binomial',
                      type.measure='class',
                      nfolds=4)
-}  
+}
 
-# get the best scores of each model
-for (i in seq(4)) {                 
-  auc_best_scores[i] <- max(models_auc[[i]]$cvm)
-  class_best_scores[i] <- max(models_class[[i]]$cvm)
+# get the bestscores and lambdas
+for (i in seq(3)) {
   auc_best_lambdas[i] <- models_auc[[i]]$lambda.min
   class_best_lambdas[i] <- models_class[[i]]$lambda.min
 }
 
-# find lambda.min that corresponds to the best score
-auc_score <- max(auc_best_scores)
-auc_position <- which.max(auc_best_scores)
-auc_lambda <- models_auc[[auc_position]]$lambda.min
-class_score <- max(class_best_scores)
-class_position <- which.max(class_best_scores)
-class_lambda <- models_class[[class_position]]$lambda.min
-
-# run final models with cv using best lambdas
-aucCV <- cv.glmnet(X,y, family='binomial', type.measure='auc', lambda=auc_best_lambdas)
-classCV <- cv.glmnet(X,y, family='binomial', type.measure='class', lambda=class_best_lambdas)
+# cross-validate on the left out fold using lambdas from 4 models computed
+mod_auc_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='auc', lambda=auc_best_lambdas)
+mod_class_4 <- cv.glmnet(X[Flds$Fold4,], y[Flds$Fold4], family='binomial', type.measure='class', lambda=class_best_lambdas)
